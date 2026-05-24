@@ -26,6 +26,8 @@
         --mauve: #a97a7a;
         --white: #ffffff;
         --vivid: #ef1f81;
+
+        /* Updated gradient based on requirements */
         --gradient-brand: linear-gradient(90deg, #bd4c7b 0%, #e9bbce 100%);
 
         /* Font Stacks matching requested brand fonts */
@@ -85,7 +87,7 @@
       .banner-container {
         width: 100%;
         height: 380px; /* Increased significantly to show more image */
-        background: var(--gradient-brand);
+        background: var(--gradient-brand); /* Colour behind image - 100% */
         position: relative;
         display: flex;
         align-items: center;
@@ -98,8 +100,7 @@
         height: 100%;
         object-fit: cover;
         object-position: center 25%; /* Perfect framing for the faces in the photos */
-        mix-blend-mode: overlay;
-        opacity: 0.7;
+        opacity: 0.34; /* Image Opacity set to 34% */
       }
 
       /* Header */
@@ -130,7 +131,7 @@
         font-weight: 800;
         letter-spacing: 2px;
         text-transform: uppercase;
-        color: var(--magenta);
+        color: var(--white);
         line-height: 1.1;
       }
 
@@ -376,14 +377,44 @@
         gap: 12px;
       }
 
-      .cat-dropdown ol {
+      .cat-dropdown ul {
         margin: 0;
-        padding: 0 16px 16px 45px;
+        padding: 0 16px 16px 16px;
+        list-style: none;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .cat-dropdown ul li {
+        background: var(--pale-rose);
+        border: 1.5px solid var(--soft-pink);
+        border-radius: 20px;
+        padding: 8px 18px;
         font-family: var(--font-primary);
-        font-weight: 500;
+        font-weight: 600;
         color: var(--dark-rose);
         font-size: 11pt;
-        line-height: 1.7;
+      }
+
+      /* Video Embed */
+      .video-container {
+        position: relative;
+        padding-bottom: 56.25%; /* 16:9 aspect ratio */
+        height: 0;
+        overflow: hidden;
+        margin-bottom: 25px;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+
+      .video-container iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: none;
       }
 
       /* Quote / human line */
@@ -548,23 +579,44 @@
         margin-bottom: 12px;
       }
 
+      /* Specific smaller size for Connect header as requested */
+      h4.smaller-connect-h4 {
+        font-size: 11pt;
+        color: var(--soft-pink);
+        margin-bottom: 8px;
+      }
+
       .footer-links {
         display: flex;
-        flex-direction: column;
-        gap: 10px;
-        font-size: 9pt;
+        flex-direction: row; /* In one line */
+        justify-content: center; /* Centered buttons */
+        flex-wrap: nowrap; /* Forces one line on desktop */
+        gap: 12px;
+        margin-top: 10px; /* Reference image style spacing */
       }
 
-      .footer-links a {
+      /* CTA Buttons (Like pill buttons next to each other in one line, and smaller) */
+      .footer-links a.btn-cta {
+        border: 2px solid var(--soft-pink);
+        border-radius: 8px;
+        padding: 8px 14px; /* Reduced padding for smaller buttons */
         color: var(--white);
         text-decoration: none;
-        transition: color 0.2s;
+        text-transform: uppercase;
+        font-family: var(--font-primary);
+        font-weight: 700;
+        font-size: 8.5pt; /* Reduced font size for smaller buttons */
+        transition: all 0.2s ease;
+        display: inline-block;
+        white-space: nowrap; /* Prevent text wrapping inside button */
       }
 
-      .footer-links a:hover {
-        color: var(--soft-pink);
+      .footer-links a.btn-cta:hover {
+        background: var(--soft-pink);
+        color: var(--burgundy);
       }
 
+      /* Making connect section also smaller as requested */
       .footer-socials {
         display: flex;
         gap: 15px;
@@ -579,12 +631,12 @@
         color: var(--soft-pink);
         text-decoration: none;
         font-weight: 600;
-        font-size: 9pt;
+        font-size: 8pt; /* Reduced font size */
         transition: color 0.2s ease;
       }
 
       .footer-socials a i {
-        font-size: 14pt;
+        font-size: 11pt; /* Reduced icon size */
       }
 
       .footer-socials a:hover {
@@ -608,6 +660,16 @@
         }
         .brand-name {
           font-size: 28px;
+        }
+
+        /* Stack buttons on mobile as one line doesn't fit */
+        .footer-links {
+          flex-direction: column;
+          align-items: center;
+        }
+        .footer-links a.btn-cta {
+          width: 100%; /* Full width when stacked */
+          text-align: center;
         }
       }
 
@@ -647,8 +709,8 @@
           </div>
           <div class="award-badges">
             <span class="badge">★ TEDx Impact Winner 2025</span>
-            <span class="badge">★ Umaversity Impact Award 2025</span>
-            <span class="badge">★ Jo Sarah Impact Pioneer Award 2025</span>
+            <span class="badge">★ 150+ Experts</span>
+            <span class="badge">★ 10000+ Women+ Helped</span>
           </div>
         </div>
       </div>
@@ -668,7 +730,7 @@
           <div class="two-col">
             <div class="method-block">
               <div class="section-label">Our Methodology</div>
-              <h2>The UMA Method</h2>
+              <h2>The UMA™ Method</h2>
 
               <div class="method-step">
                 <div class="step-letter">U</div>
@@ -712,10 +774,12 @@
               <h2>The First Place For Women's+ Health</h2>
               <p>
                 Umaversity is the first place women+ come to learn, share and
-                connect about their health through inclusive education, Vetted
-                expert-led support and a Community that just gets you. We bridge
-                the gap between the question a woman+ cannot quite form yet and
-                the full, inclusive education she deserves.
+                connect about their health through inclusive
+                <strong>education</strong>, vetted
+                <strong>expert-led support</strong> and a
+                <strong>community</strong> that just gets you. We bridge the gap
+                between the question a woman+ cannot quite form yet and the
+                full, inclusive education she deserves.
               </p>
               <p>
                 We bring together Western medicine, holistic healing,
@@ -759,68 +823,82 @@
                 <summary>
                   <div class="summary-title">❤️ Hormonal Health</div>
                 </summary>
-                <ol>
+                <ul>
                   <li>Menstrual Health</li>
                   <li>Hormonal Balance</li>
                   <li>Peri-Menopause</li>
                   <li>Menopause</li>
-                </ol>
+                </ul>
               </details>
 
               <details class="cat-dropdown">
                 <summary>
                   <div class="summary-title">💗 Love and Relationships</div>
                 </summary>
-                <ol>
-                  <li>Intimacy, Boundaries and Consent</li>
-                  <li>Communication</li>
+                <ul>
+                  <li>Intimacy</li>
+                  <li>Communication : Boundaries and Consent</li>
                   <li>Monogamy</li>
                   <li>Non-Monogamy</li>
-                </ol>
+                </ul>
               </details>
 
               <details class="cat-dropdown">
                 <summary>
                   <div class="summary-title">💜 Motherhood</div>
                 </summary>
-                <ol>
+                <ul>
                   <li>Fertility</li>
                   <li>Pregnancy</li>
                   <li>Post-Partum</li>
-                </ol>
+                </ul>
               </details>
 
               <details class="cat-dropdown">
                 <summary>
                   <div class="summary-title">🧡 Self-Care</div>
                 </summary>
-                <ol>
+                <ul>
                   <li>Mental Well-being</li>
                   <li>Emotional Well-being</li>
                   <li>Nervous System Regulation</li>
                   <li>Self-love and Self-care</li>
-                </ol>
+                </ul>
               </details>
 
               <details class="cat-dropdown">
                 <summary>
                   <div class="summary-title">💛 Sexual Well-being</div>
                 </summary>
-                <ol>
+                <ul>
                   <li>Female+ Anatomy</li>
                   <li>Sexual Trauma Healing</li>
-                  <li>Discovering your pleasure</li>
-                  <li>Exploring Sexuality</li>
-                </ol>
+                  <li>Exploring your pleasure and sexuality</li>
+                </ul>
               </details>
             </div>
           </div>
 
+          <div class="video-container">
+            <iframe
+              src="https://www.youtube.com/embed/djmBCq8S-lU"
+              allow="
+                accelerometer;
+                autoplay;
+                clipboard-write;
+                encrypted-media;
+                gyroscope;
+                picture-in-picture;
+              "
+              allowfullscreen
+            ></iframe>
+          </div>
+
           <div class="human-line">
             <p class="quote-font">
-              "One empowering conversation with the right woman+ can transform
-              your entire health journey. Umaversity guides you to exactly who
-              and what you need."
+              "A five minute conversation with another woman can transform your
+              entire health journey. Umaversity guides you to exactly who and
+              what you need."
             </p>
           </div>
 
@@ -861,7 +939,7 @@
             <h2>Everything a Woman+ Needs, in One Place</h2>
             <div class="platform-items">
               <div class="platform-item">
-                <strong>Events</strong>
+                <strong>EVENTS</strong>
                 <p>
                   Online and offline events, Member Circles, Q&A Sessions, live
                   masterclasses, expert access, and a thriving global community,
@@ -869,7 +947,7 @@
                 </p>
               </div>
               <div class="platform-item">
-                <strong>Umapedia</strong>
+                <strong>UMAPEDIA</strong>
                 <p>
                   200+ expert videos, 80+ e-books, articles, real stories, and
                   research, covering every pillar of women's+ health in
@@ -877,7 +955,7 @@
                 </p>
               </div>
               <div class="platform-item">
-                <strong>Custom Growth Journeys</strong>
+                <strong>CUSTOM GROWTH JOURNEYS</strong>
                 <p>
                   Tailored educational paths designed to meet you exactly where
                   you are in your health journey, offering step-by-step
@@ -885,7 +963,7 @@
                 </p>
               </div>
               <div class="platform-item">
-                <strong>Upcoming Expert Center</strong>
+                <strong>UPCOMING EXPERT CENTER</strong>
                 <p>
                   Where women+ can book sessions with experts that they have
                   come to learn and trust through the education of Umaversity.
@@ -932,6 +1010,21 @@
               </div>
             </div>
           </div>
+
+          <div class="video-container">
+            <iframe
+              src="https://www.youtube.com/embed/spGGv0nfk1I"
+              allow="
+                accelerometer;
+                autoplay;
+                clipboard-write;
+                encrypted-media;
+                gyroscope;
+                picture-in-picture;
+              "
+              allowfullscreen
+            ></iframe>
+          </div>
         </div>
       </div>
 
@@ -947,22 +1040,32 @@
               <a
                 href="https://inside.umaversity.com/invitation?code=32254A#landing-page"
                 target="_blank"
+                class="btn-cta"
                 >Become A Member</a
               >
-              <a href="https://www.umaversity.com/experts" target="_blank"
+              <a
+                href="https://www.umaversity.com/experts"
+                target="_blank"
+                class="btn-cta"
                 >Apply As An Expert</a
               >
-              <a href="https://www.umaversity.com/book" target="_blank"
+              <a
+                href="https://www.umaversity.com/book"
+                target="_blank"
+                class="btn-cta"
                 >Book Umaversity At Your Organization</a
               >
-              <a href="https://www.cal.com/josarah/discovery" target="_blank"
-                >Want to work with us? Book a call with founder Jo Sarah</a
+              <a
+                href="https://www.cal.com/josarah/discovery"
+                target="_blank"
+                class="btn-cta"
+                >Book a call with Jo Sarah</a
               >
             </div>
           </div>
 
           <div class="footer-col">
-            <h4>Connect</h4>
+            <h4 class="smaller-connect-h4">Connect</h4>
             <div class="footer-socials">
               <a href="https://www.instagram.com/umaversity" target="_blank">
                 <i class="fa-brands fa-instagram"></i> Instagram
